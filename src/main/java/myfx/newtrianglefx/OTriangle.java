@@ -14,11 +14,14 @@ public class OTriangle {
             this.a = new SimpleDoubleProperty(a);
             this.b = new SimpleDoubleProperty(b);
             this.c = new SimpleDoubleProperty(c);
+
+            this.a.addListener((val, old, newval)-> System.out.println(old+" ===> "+newval));
         }
-        double getPerim() {
+
+       public double getPerim() {
             return a.get() + b.get() + b.get();
         }
-        public double calcSquareTriangle() {
+       public double getArea() {
             double p = 0.5*getPerim(); //S= √ p ⋅ (p− a) ⋅ (p− b) ⋅ (p− c).
             double triangleSquare = Math.sqrt((p*(p- a.get())*(p- b.get())*(p- b.get())));
             return triangleSquare;
@@ -35,6 +38,18 @@ public class OTriangle {
 
     public double getA() {
         return a.get();
+    }
+
+    public void setA(double a) {
+        this.a.set(a);
+    }
+
+    public void setB(double b) {
+        this.b.set(b);
+    }
+
+    public void setC(double c) {
+        this.c.set(c);
     }
 
     public SimpleDoubleProperty aProperty() {

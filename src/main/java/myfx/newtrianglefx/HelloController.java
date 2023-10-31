@@ -2,67 +2,62 @@ package myfx.newtrianglefx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
 public class HelloController {
     @FXML
-    private TableColumn<OTriangle, Double> a;
+    private TableColumn<OTriangle, Double> colA;
     @FXML
-    private TableColumn<OTriangle, Double> b;
+    private TableColumn<OTriangle, Double> colB;
     @FXML
     private Button btnLoad;
     @FXML
-    private TableColumn<OTriangle, Double> c;
+    private TableColumn<OTriangle, Double> colC;
     @FXML
-    private TableColumn<OTriangle, Double> perim;
+    private TableColumn<OTriangle, Double> colPerim;
+    @FXML
+    private TableColumn<OTriangle, Double> colArea;
     @FXML
     private TableView<OTriangle> table;
     @FXML
     private TextField txtFname;
-    @FXML
-    void loadCarsFromFile(ActionEvent event) {
-    }
+
     @FXML
     ListView<OTriangle> trList;
+
     ObservableList<OTriangle> triangles = FXCollections.observableArrayList();
     public void initialize() throws Exception {
         triangles.add(new OTriangle(15, 16, 21));
-        trList.setItems(triangles);
+       // trList.setItems(triangles);
         initTable();
     }
 
     private void initTable() {
         table.setItems(triangles);
-        table.getColumns().clear();
+      //  table.getColumns().clear();
         table.setEditable(true);
 
-        //TableColumn<OTriangle, Double> columnA = new TableColumn<>("A");
-        a.setCellValueFactory(new PropertyValueFactory<>("a")); //как извлекать данные из объекта
-        //как нарисовать в каждой ячейке столбца поле для ввода
-        a.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 
-        //TableColumn<OTriangle, Double> columnB = new TableColumn<>("B");
-        b.setCellValueFactory(new PropertyValueFactory<>("b"));
-        b.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        colA.setCellValueFactory(new PropertyValueFactory<>("a"));
+        colA.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 
-        //TableColumn<OTriangle, Double> columnC = new TableColumn<>("C");
-        c.setCellValueFactory(new PropertyValueFactory<>("c"));
-        c.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        colB.setCellValueFactory(new PropertyValueFactory<>("b"));
+        colB.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 
-        //perim.setCellFactory(OTriangle.getPerim(triangles));
+        colC.setCellValueFactory(new PropertyValueFactory<>("c"));
+        colC.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 
-        //table.getColumns().addAll(columnA, columnB, columnC);
+        colPerim.setCellValueFactory(new PropertyValueFactory<>("perim"));
+
+        colArea.setCellValueFactory(new PropertyValueFactory<>("area"));
     }
 
     @FXML
@@ -72,12 +67,14 @@ public class HelloController {
             List<String> lines = Files.readAllLines(Path.of(fname));
             for (String s: lines ) {
                 String[] words = s.split(" ");
-                OTriangle tri = new OTriangle(Integer.parseInt(words[0]), Integer.parseInt(words[1]), Integer.parseInt(words[2]));
+                OTriangle tri = new OTriangle(Double.parseDouble(words[0]), Double.parseDouble(words[1]), Double.parseDouble(words[2]));
                 triangles.add(tri);
             }
 
         }catch (Exception e)
-        {}
+        {
+            System.out.println("ошибка чтения");
+        }
     }
 
 

@@ -10,10 +10,11 @@
    <children>
       <TableView fx:id="table" layoutX="31.0" layoutY="93.0" prefHeight="198.0" prefWidth="370.0">
          <columns>
-            <TableColumn fx:id="a" prefWidth="75.0" text="a" />
-            <TableColumn fx:id="b" prefWidth="75.0" text="b" />
-            <TableColumn fx:id="c" prefWidth="75.0" text="c" />
-            <TableColumn fx:id="perim" prefWidth="75.0" text="perim" />
+            <TableColumn fx:id="colA" prefWidth="75.0" text="a" />
+            <TableColumn fx:id="colB" prefWidth="75.0" text="b" />
+            <TableColumn fx:id="colC" prefWidth="75.0" text="c" />
+            <TableColumn fx:id="colPerim" prefWidth="75.0" text="perim" />
+            <TableColumn fx:id="colArea" prefWidth="75.0" text="площадь" />
          </columns>
       </TableView>
       <TextField fx:id="txtFname" layoutX="33.0" layoutY="30.0" text="input.txt" />
