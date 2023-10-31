@@ -4,6 +4,9 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 public class OTriangle {
             SimpleDoubleProperty a,b,c;
+            SimpleDoubleProperty area;
+            SimpleDoubleProperty perim;
+
         public OTriangle(double a, double b, double c) throws Exception {
 
             if (a <= 0 || b <= 0 || c <= 0)
@@ -15,14 +18,26 @@ public class OTriangle {
             this.b = new SimpleDoubleProperty(b);
             this.c = new SimpleDoubleProperty(c);
 
-            this.a.addListener((val, old, newval)-> System.out.println(old+" ===> "+newval));
+            this.perim = new SimpleDoubleProperty();
+            this.area = new SimpleDoubleProperty();
+
+            update();
+
+            this.a.addListener(x-> update());
+            this.b.addListener(x-> update());
+            this.c.addListener(x-> update());
         }
 
-       public double getPerim() {
-            return a.get() + b.get() + b.get();
+        private void update(){
+            perim.set(calcPerim());
+            area.set(calcArea());
         }
-       public double getArea() {
-            double p = 0.5*getPerim(); //S= √ p ⋅ (p− a) ⋅ (p− b) ⋅ (p− c).
+
+       public double calcPerim() {
+            return a.get() + b.get() + c.get();
+        }
+       public double calcArea() {
+            double p = 0.5*calcPerim(); //S= √ p ⋅ (p− a) ⋅ (p− b) ⋅ (p− c).
             double triangleSquare = Math.sqrt((p*(p- a.get())*(p- b.get())*(p- b.get())));
             return triangleSquare;
         }
@@ -70,5 +85,21 @@ public class OTriangle {
 
     public SimpleDoubleProperty cProperty() {
         return c;
+    }
+
+    public double getArea() {
+        return area.get();
+    }
+
+    public SimpleDoubleProperty areaProperty() {
+        return area;
+    }
+
+    public double getPerim() {
+        return perim.get();
+    }
+
+    public SimpleDoubleProperty perimProperty() {
+        return perim;
     }
 }

@@ -2,6 +2,7 @@ package myfx.newtrianglefx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -48,6 +49,7 @@ public class HelloController {
 
         colA.setCellValueFactory(new PropertyValueFactory<>("a"));
         colA.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+
 
         colB.setCellValueFactory(new PropertyValueFactory<>("b"));
         colB.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
